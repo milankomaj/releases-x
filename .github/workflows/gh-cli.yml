@@ -12,7 +12,9 @@ jobs:
       - name: cli gh release view
         run: |
          gh release view --json tagName
-         gh release view --json tagName --jq .tagName
+        #  gh release view --json tagName --jq .tagName
+         echo "last_relase=$(gh release view --json tagName --jq .tagName)" >> $GITHUB_ENV
+         echo ${{ env.last_relase }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
