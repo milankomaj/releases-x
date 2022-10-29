@@ -1,0 +1,18 @@
+name: gh-cli
+on:
+ workflow_dispatch:
+
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: cli
+
+        run: |
+         gh release create v0.1 '/file_2.txt#file_2.txt'
+
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
