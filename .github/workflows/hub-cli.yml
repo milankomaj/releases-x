@@ -12,6 +12,6 @@ jobs:
       - name: cli
         run: |
          tree ./
-         hub release create -at "./file_2.txt" -m "v0.1"
+         hub release create -at "file_2.txt" -m "v0.1"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
