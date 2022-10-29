@@ -13,7 +13,8 @@ jobs:
         run: |
          gh release view --jq tag \
          | jq
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: cli gh release create
         run: |
