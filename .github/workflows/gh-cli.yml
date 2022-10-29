@@ -34,7 +34,7 @@ jobs:
 
       - name: cli gh release view
         run: |
-         gh release delete * --cleanup-tag --yes
+         gh release delete * --cleanup-tag
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
