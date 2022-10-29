@@ -8,9 +8,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: cli
+
+      - name: cli gh release view
         run: |
-         gh release view
+         gh release view --jq \
+         | jq
+
+
+      - name: cli gh release create
+        run: |
          gh release create \
           ${{ github.run_id }} \
           ./*.txt \
