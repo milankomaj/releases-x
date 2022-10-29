@@ -2,7 +2,7 @@ name: gh-cli
 on:
  workflow_dispatch:
 
-
+jobs:
   cli:
     runs-on: ubuntu-latest
 
