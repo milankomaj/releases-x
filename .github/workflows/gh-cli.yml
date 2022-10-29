@@ -12,7 +12,7 @@ jobs:
       - name: cli
 
         run: |
-         gh release create v0.1 './file_2.txt#file_2.txt'
+         gh release create v0.1 '${{ github.action_path }}/file_2.txt#file_2.txt'
 
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
