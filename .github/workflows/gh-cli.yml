@@ -14,4 +14,4 @@ jobs:
          gh release create v0.1 ${{ github.workspace }}/file_2.txt --target master
 
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
