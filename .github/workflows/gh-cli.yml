@@ -18,6 +18,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: cli gh release delete
+        run: |
+         gh release delete ${{ env.last_relase }} --cleanup-tag --yes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: cli gh release create
         run: |
          gh release create \
@@ -28,13 +34,5 @@ jobs:
           --generate-notes \
           --title v0.2
        # gh release create v0.3 ./file_1.txt ./file_2.txt --target master --notes-start-tag v0.2 --generate-notes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-      - name: cli gh release view
-        run: |
-         gh release delete ${{ env.last_relase }} --cleanup-tag --yes
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
