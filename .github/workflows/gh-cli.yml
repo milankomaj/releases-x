@@ -11,7 +11,7 @@ jobs:
       - name: cli
         run: |
          gh release create \
-          ${{ github.sha }} \
+          ${{ github.run_id }} \
           ./*.txt \
           --target master \
           --generate-notes \
