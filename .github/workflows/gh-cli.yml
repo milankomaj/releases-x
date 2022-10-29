@@ -10,6 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: cli
         run: |
+         gh release view
          gh release create \
           ${{ github.run_id }} \
           ./*.txt \
