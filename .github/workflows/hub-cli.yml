@@ -14,4 +14,4 @@ jobs:
          tree ${{ github.action_path }}
          hub release create -at ${{ github.action_path }}/file_2.txt -m "v0.1"
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.ACCESS_TOKEN}}
