@@ -1,0 +1,16 @@
+name: hub-cli
+on:
+ workflow_dispatch:
+
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: cli
+        run: |
+
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
