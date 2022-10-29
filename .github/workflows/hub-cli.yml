@@ -6,12 +6,11 @@ on:
 jobs:
   cli:
     runs-on: ubuntu-latest
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      
     steps:
       - uses: actions/checkout@v3
       - name: cli
         run: |
          hub release create -m "v0.1" "release"
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
