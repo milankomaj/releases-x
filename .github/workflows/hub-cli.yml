@@ -11,6 +11,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: cli
         run: |
-         hub release create -at ${{ github.workspace }}/file_2.txt -m "v0.1"
+         hub release create -at ${{ github.action_path }}/file_2.txt -m "v0.1"
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
