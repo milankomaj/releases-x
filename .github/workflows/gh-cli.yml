@@ -11,8 +11,8 @@ jobs:
 
       - name: cli gh release view
         run: |
-         gh release view --json tagName --jq tag \
-         | jq
+         gh release view --json tagName
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
