@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: cli
         run: |
-         gh release create v0.1 ${{ github.workspace }}/file_2.txt
+         gh release create v0.1 ${{ github.workspace }}/file_2.txt --target master
 
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
