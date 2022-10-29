@@ -11,7 +11,7 @@ jobs:
 
       - name: cli gh release view
         run: |
-         gh release view --jq \
+         gh release view --jq tag \
          | jq
 
 
