@@ -1,0 +1,79 @@
+name: 'Create release.'
+description: 'release create action'
+
+inputs:
+  token:  # id of input
+    description: 'Use token'
+    required: true
+    default: ''
+  title:  # id of input
+    description: 'Use title'
+    required: true
+    default: ''
+  tag:  # id of input
+    description: 'Use tag'
+    required: false
+    default: ''
+  rewrite:  # id of input
+    description: 'Use rewrite'
+    required: false
+    default: false
+    type: boolean
+
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: inputs.token
+       id: token
+       if: inputs.token
+      run: echo "token=$(echo ${{ inputs.token }})" >> $GITHUB_ENV
+
+
+    - name: inputs.title
+      id: title
+      if: inputs.title
+      run: echo "title=$(echo ${{ inputs.title }})" >> $GITHUB_ENV
+
+
+    - name: inputs.tag
+      id: tag
+      if: inputs.tag
+      run: echo "tag=$(echo ${{ inputs.tag }})" >> $GITHUB_ENV
+
+
+    - name: check
+      id: check
+      continue-on-error: true
+      run: gh release view
+
+    - name: view
+      id: view
+      continue-on-error: true
+      run: |
+        gh release view
+        last_relase=$(gh release view --json tagName --jq .tagName)
+        echo "last_relase=$(echo $last_relase)" >> $GITHUB_ENV
+        echo ${{ env.last_relase }}
+
+
+    - name: create
+      id: create
+      if: ${{ always() }}
+      run: |
+        gh release create \
+        $${{ env.inputs.tag }} \
+        ./*.txt \
+        --target master \
+        --notes-start-tag ${{ env.last_relase }} \
+        --title $${{ env.inputs.title }}
+        new_relase=$(gh release view --json tagName --jq .tagName)
+        echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
+        echo ${{ env.new_relase }}
+
+    - name: rewrite
+      id: rewrite
+      if: inputs.rewrite == 'true'
+      continue-on-error: true
+      run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes

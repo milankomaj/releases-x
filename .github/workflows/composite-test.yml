@@ -1,0 +1,25 @@
+name: release
+run-name: ${{ github.workflow }} ✅ ${{ github.actor }} ✅ ${{ github.event_name}}
+on:
+  workflow_dispatch:
+
+
+jobs:
+  bash:
+    name: release create
+    continue-on-error: false
+    strategy:
+      max-parallel: 3
+      matrix:
+       os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: milankomaj/releases-x@v0.1
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          title: 'v0.2'
+          tag: ''
+          rewrite: 'true'
