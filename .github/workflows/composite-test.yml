@@ -21,6 +21,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           title: 'relase'
-          tag: 'v0.3'
+          tag: 'v0.4'
           files: './*.txt'
           rewrite: 'false'
