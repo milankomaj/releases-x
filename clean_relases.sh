@@ -1,3 +1,3 @@
 #!/bin/sh
 gh release list
-gh release list --limit 9999 | gawk -F '\t' '$2 == "v0.2" {print $3}' | xargs -L1 gh release delete --yes
+gh release list --limit 9999 | gawk -F '\t' '$2 == "release" {print $3}' | xargs -L1 gh release delete --yes
