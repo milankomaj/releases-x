@@ -73,10 +73,10 @@ runs:
 
     - name: rewrite
       id: rewrite
-      if: inputs.rewrite == 'true' && env.api != '[]' && steps.create.outcome == 'success'
+      if: inputs.rewrite == 'true' && env.api != '[]'
       run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
       shell: bash
-      
+
     - name: create
       id: create
       if: ${{ always() }}
