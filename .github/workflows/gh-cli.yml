@@ -9,9 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: cli gh release list
+      - name: cli gh release view
         run: |
-         gh release list
+         gh release view
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
