@@ -3,6 +3,7 @@ name: gh-cli
 on:
  workflow_dispatch:
 
+
 jobs:
   cli:
     runs-on: ubuntu-latest
@@ -46,7 +47,7 @@ jobs:
         continue-on-error: true
         run: |
          git fetch --tags
-         log_relase=$(git log --date=short --pretty='%f; author: %cn; date: %ci; subject:%s' ${{ env.last_relase }}..${{ env.new_relase }})
+         log_relase=$(git log --date=short --pretty='format: author: %cn; date: %ci; subject:%s' ${{ env.last_relase }}..${{ env.new_relase }})
          echo "log_relase=$(echo $log_relase)" >> $GITHUB_ENV
          echo ${{ env.log_relase }}
         env:
