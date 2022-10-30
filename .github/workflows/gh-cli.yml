@@ -37,6 +37,16 @@ jobs:
           --notes-start-tag ${{ env.last_relase }} \
           --title v0.2
        # gh release create v0.3 ./file_1.txt ./file_2.txt --target master --notes-start-tag v0.2 --generate-notes
+         new_relase=$(gh release view --json tagName --jq .tagName)
+         echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
+         echo ${{ env.new_relase }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: git log
+        continue-on-error: true
+        run: |
+         git log --pretty=oneline ${{ env.last_relase }}..${{ env.new_relase }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
