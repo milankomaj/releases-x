@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: cli gh release delete
-        if: ${{ success() }}
+        continue-on-error: true
         run: |
          gh release delete ${{ env.last_relase }} --cleanup-tag --yes
         env:
