@@ -11,6 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+
+      - name: cli gh release view
+        continue-on-error: true
+        run: |
+         gh release view
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: cli gh release view
         continue-on-error: true
         run: |

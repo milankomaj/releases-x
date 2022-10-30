@@ -26,6 +26,8 @@ inputs:
 
 
 runs:
+  strategy:
+    fail-fast: false
   using: "composite"
   steps:
 
@@ -55,7 +57,7 @@ runs:
 
     - name: check
       id: check
-      run: gh release list
+      run: gh release view
       shell: bash
 
     - name: view
