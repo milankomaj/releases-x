@@ -25,6 +25,7 @@ jobs:
           tag: 'v0.2'
           rewrite: 'true'          
           files: | 
-           '${{ github.workspace }}/aa/*.*' 
-           '${{ github.workspace }}/bb/*.*'
-
+           '
+           ${{ github.workspace }}/aa/*.* 
+           ${{ github.workspace }}/bb/*.*
+           '
