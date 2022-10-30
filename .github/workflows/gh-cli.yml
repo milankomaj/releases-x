@@ -27,7 +27,7 @@ jobs:
 
 
       - name: cli gh release create
-        if: ${{ failure() }}
+        if: ${{ always() }}
         run: |
          gh release create \
           ${{ github.run_id }} \
