@@ -33,28 +33,31 @@ runs:
       id: token
       if: inputs.token
       run: echo "token=$(echo ${{ inputs.token }})" >> $GITHUB_ENV
-
+      shell: bash
 
     - name: inputs.title
       id: title
       if: inputs.title
       run: echo "title=$(echo ${{ inputs.title }})" >> $GITHUB_ENV
-
+      shell: bash
 
     - name: inputs.tag
       id: tag
       if: inputs.tag
       run: echo "tag=$(echo ${{ inputs.tag }})" >> $GITHUB_ENV
+      shell: bash
 
     - name: inputs.files
       id: files
       if: inputs.files
       run: echo "files=$(echo ${{ inputs.files }})" >> $GITHUB_ENV
+      shell: bash
 
     - name: check
       id: check
       continue-on-error: true
       run: gh release view
+      shell: bash
 
     - name: view
       id: view
@@ -64,7 +67,7 @@ runs:
         last_relase=$(gh release view --json tagName --jq .tagName)
         echo "last_relase=$(echo $last_relase)" >> $GITHUB_ENV
         echo ${{ env.last_relase }}
-
+      shell: bash
 
     - name: create
       id: create
@@ -79,9 +82,11 @@ runs:
         new_relase=$(gh release view --json tagName --jq .tagName)
         echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
         echo ${{ env.new_relase }}
+      shell: bash
 
     - name: rewrite
       id: rewrite
       if: inputs.rewrite == 'true'
       continue-on-error: true
       run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
+      shell: bash
