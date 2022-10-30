@@ -23,5 +23,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           title: 'relase'
           tag: 'v0.2'
-          files: '${{ github.workspace }}/aa/*.*'
+          files: '${{ github.workspace }}/aa/*.* ${{ github.workspace }}/bb/*.*'
           rewrite: 'true'
