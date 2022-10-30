@@ -13,5 +13,7 @@ jobs:
         run: |
          chmod +x ./clean_relases.sh
          ./clean_relases.sh
+         git fetch
+         git tag -l | xargs -n 1 git push --delete origin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
