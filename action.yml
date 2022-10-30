@@ -53,9 +53,18 @@ runs:
       run: echo "files=$(echo ${{ inputs.files }})" >> $GITHUB_ENV
       shell: bash
 
+    - name: api
+      id: api
+      run: |
+       api=$(gh api repos/${{ github.repository }}/releases)
+       echo "api=$(echo $api)" >> $GITHUB_ENV
+       echo ${{ env.api }}
+
+      shell: bash
+
     - name: view
       id: view
-      continue-on-error: true
+      if: ${{ env.api }} != '[]'
       run: |
         gh release view
         last_relase=$(gh release view --json tagName --jq .tagName)
@@ -65,7 +74,7 @@ runs:
 
     - name: rewrite
       id: rewrite
-      if: inputs.rewrite == 'true' && steps.view.outcome == 'success'
+      if: inputs.rewrite == 'true' && ${{ env.api }} != '[]'
       run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
       shell: bash
 
