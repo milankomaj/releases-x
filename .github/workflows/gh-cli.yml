@@ -48,7 +48,7 @@ jobs:
         continue-on-error: true
         run: |
          git fetch --tags
-         git log --date=short --pretty=oneline ${{ env.last_relase }}..${{ env.new_relase }}
+         git log --date=short --pretty='format:%C(auto)%h' ${{ env.last_relase }}..${{ env.new_relase }}
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
