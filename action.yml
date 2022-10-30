@@ -59,7 +59,6 @@ runs:
        api=$(gh api repos/${{ github.repository }}/releases)
        echo "api=$(echo $api)" >> $GITHUB_ENV
        echo ${{ env.api }}
-
       shell: bash
 
     - name: view
