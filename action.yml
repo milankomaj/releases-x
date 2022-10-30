@@ -55,13 +55,12 @@ runs:
 
     - name: check
       id: check
-      continue-on-error: true
       run: gh release view
       shell: bash
 
     - name: view
       id: view
-      continue-on-error: true
+      if: steps.check.outcome == 'success'
       run: |
         gh release view
         last_relase=$(gh release view --json tagName --jq .tagName)
@@ -71,8 +70,7 @@ runs:
 
     - name: rewrite
       id: rewrite
-      if: inputs.rewrite == 'true'
-      continue-on-error: true
+      if: inputs.rewrite == 'true' && steps.check.outcome == 'success'
       run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
       shell: bash
 
