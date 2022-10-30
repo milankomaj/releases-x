@@ -30,8 +30,8 @@ runs:
   steps:
 
     - name: inputs.token
-       id: token
-       if: inputs.token
+      id: token
+      if: inputs.token
       run: echo "token=$(echo ${{ inputs.token }})" >> $GITHUB_ENV
 
 
