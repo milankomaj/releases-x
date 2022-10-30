@@ -2,8 +2,8 @@ name: 'Create release.'
 description: 'release create action'
 
 inputs:
-  token:  # id of input
-    description: 'Use token'
+  GITHUB_TOKEN:  # id of input
+    description: 'Use GITHUB_TOKEN'
     required: true
     default: ''
   title:  # id of input
@@ -29,10 +29,10 @@ runs:
   using: "composite"
   steps:
 
-    - name: inputs.token
-      id: token
-      if: inputs.token
-      run: echo "token=$(echo ${{ inputs.token }})" >> $GITHUB_ENV
+    - name: inputs.GITHUB_TOKEN
+      id: GITHUB_TOKEN
+      if: inputs.GITHUB_TOKEN
+      run: echo "GITHUB_TOKEN=$(echo ${{ inputs.GITHUB_TOKEN }})" >> $GITHUB_ENV
       shell: bash
 
     - name: inputs.title
@@ -74,7 +74,7 @@ runs:
       if: ${{ always() }}
       run: |
         gh release create \
-        $${{ env.inputs.tag }} \
+        ${{ env.inputs.tag }} \
         ${{ env.files }} \
         --target master \
         --notes-start-tag ${{ env.last_relase }} \
