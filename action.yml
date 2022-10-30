@@ -55,7 +55,7 @@ runs:
 
     - name: check
       id: check
-      run: gh release view
+      run: gh release list
       shell: bash
 
     - name: view
