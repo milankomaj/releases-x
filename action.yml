@@ -64,7 +64,7 @@ runs:
 
     - name: view
       id: view
-      if: ${{ env.api  != '[]' }}
+      if: env.api  != '[]'
       run: |
         gh release view
         last_relase=$(gh release view --json tagName --jq .tagName)
@@ -74,7 +74,7 @@ runs:
 
     - name: rewrite
       id: rewrite
-      if: inputs.rewrite == 'true' && ${{ env.api  != '[]' }}
+      if: inputs.rewrite == 'true' && env.api  != '[]'
       run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
       shell: bash
 
