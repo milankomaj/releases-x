@@ -22,4 +22,5 @@ jobs:
           token: '${{ secrets.GITHUB_TOKEN }}'
           title: 'v0.2'
           tag: ''
+          files: './*.txt'
           rewrite: 'true'

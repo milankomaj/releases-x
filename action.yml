@@ -14,6 +14,10 @@ inputs:
     description: 'Use tag'
     required: false
     default: ''
+  files:  # id of input
+    description: 'Use files'
+    required: false
+    default: ''
   rewrite:  # id of input
     description: 'Use rewrite'
     required: false
@@ -42,6 +46,10 @@ runs:
       if: inputs.tag
       run: echo "tag=$(echo ${{ inputs.tag }})" >> $GITHUB_ENV
 
+    - name: inputs.files
+      id: files
+      if: inputs.files
+      run: echo "files=$(echo ${{ inputs.files }})" >> $GITHUB_ENV
 
     - name: check
       id: check
@@ -64,7 +72,7 @@ runs:
       run: |
         gh release create \
         $${{ env.inputs.tag }} \
-        ./*.txt \
+        ${{ env.files }} \
         --target master \
         --notes-start-tag ${{ env.last_relase }} \
         --title $${{ env.inputs.title }}
