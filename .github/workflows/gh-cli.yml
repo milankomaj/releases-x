@@ -16,7 +16,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: cli gh release view
-        if: ${{ failure() }}
+        if: ${{ success() }}
         run: |
          gh release view
          last_relase=$(gh release view --json tagName --jq .tagName)
@@ -27,7 +27,7 @@ jobs:
 
 
       - name: cli gh release create
-        if: ${{ success() }}
+        if: ${{ failure() }}
         run: |
          gh release create \
           ${{ github.run_id }} \
