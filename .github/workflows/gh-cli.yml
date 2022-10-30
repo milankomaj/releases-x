@@ -5,21 +5,18 @@ on:
 jobs:
   cli:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    
     steps:
       - uses: actions/checkout@v3
 
-      - name: cli gh release list
+      - name: cli gh release view
         run: |
-         gh release list
-         list_relase=$(gh release list)
-         echo "list_relase=$(echo $list_relase)" >> $GITHUB_ENV
-         echo ${{ env.list_relase }}
+         gh release view
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: cli gh release view
-        if: ${{env.list_relase}}
+        if: success()
         run: |
          gh release view
          last_relase=$(gh release view --json tagName --jq .tagName)
