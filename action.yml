@@ -69,6 +69,13 @@ runs:
         echo ${{ env.last_relase }}
       shell: bash
 
+    - name: rewrite
+      id: rewrite
+      if: inputs.rewrite == 'true'
+      continue-on-error: true
+      run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
+      shell: bash
+
     - name: create
       id: create
       if: ${{ always() }}
@@ -82,11 +89,4 @@ runs:
         new_relase=$(gh release view --json tagName --jq .tagName)
         echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
         echo ${{ env.new_relase }}
-      shell: bash
-
-    - name: rewrite
-      id: rewrite
-      if: inputs.rewrite == 'true'
-      continue-on-error: true
-      run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
       shell: bash
