@@ -19,7 +19,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: cli gh release view
-        if: ${{env.list_relase != '0'}}
+        if: ${{env.list_relase}}
         run: |
          gh release view
          last_relase=$(gh release view --json tagName --jq .tagName)
