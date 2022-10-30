@@ -23,4 +23,4 @@ jobs:
           title: 'relase'
           tag: 'v0.3'
           files: './*.txt'
-          rewrite: 'true'
+          rewrite: 'false'
