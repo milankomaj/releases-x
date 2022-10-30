@@ -8,7 +8,7 @@ inputs:
     default: ''
   title:  # id of input
     description: 'Use title'
-    required: false
+    required: true
     default: ''
   tag:  # id of input
     description: 'Use tag'
