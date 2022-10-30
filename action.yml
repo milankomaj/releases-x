@@ -53,15 +53,9 @@ runs:
       run: echo "files=$(echo ${{ inputs.files }})" >> $GITHUB_ENV
       shell: bash
 
-    - name: check
-      id: check
-      continue-on-error: true
-      run: gh release view
-      shell: bash
-
     - name: view
       id: view
-      if: steps.check.outcome == 'success'
+      continue-on-error: true
       run: |
         gh release view
         last_relase=$(gh release view --json tagName --jq .tagName)
@@ -71,7 +65,7 @@ runs:
 
     - name: rewrite
       id: rewrite
-      if: inputs.rewrite == 'true' && steps.check.outcome == 'success'
+      if: inputs.rewrite == 'true' && steps.view.outcome == 'success'
       run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
       shell: bash
 
