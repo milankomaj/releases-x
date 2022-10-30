@@ -20,7 +20,7 @@ jobs:
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          title: 'relase'
+          title: 'relase 2'
           tag: 'v0.2'
           files: './*.txt'
-
+          rewrite: 'false'
