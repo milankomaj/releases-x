@@ -34,7 +34,7 @@ jobs:
           ${{ github.run_id }} \
           ./*.txt \
           --target master \
-          --notes-start-tag ${{ env.last_relase }} \
+       #  --notes-start-tag ${{ env.last_relase }} \
           --generate-notes \
           --title v0.2
        # gh release create v0.3 ./file_1.txt ./file_2.txt --target master --notes-start-tag v0.2 --generate-notes
