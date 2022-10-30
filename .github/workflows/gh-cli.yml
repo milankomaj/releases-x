@@ -56,7 +56,7 @@ jobs:
       - name: cli gh release edit
         continue-on-error: true
         run: |
-         gh release edit ${{ env.new_relase }} --notes 123
+         gh release edit ${{ env.new_relase }} --notes "bugfix release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
