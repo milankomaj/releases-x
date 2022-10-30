@@ -13,6 +13,7 @@ jobs:
       matrix:
        os: [ubuntu-latest]
 
+
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +21,7 @@ jobs:
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          title: 'relase 2'
+          title: 'relase'
           tag: 'v0.2'
-          files: './*.txt'
-          rewrite: 'false'
+          files: 'file_2.txt'
+          rewrite: 'true'
