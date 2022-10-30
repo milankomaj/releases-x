@@ -78,7 +78,7 @@ runs:
         ${{ env.files }} \
         --target master \
         --notes-start-tag ${{ env.last_relase }} \
-        --title $${{ env.title }}
+        --title ${{ env.title }}
         new_relase=$(gh release view --json tagName --jq .tagName)
         echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
         echo ${{ env.new_relase }}
