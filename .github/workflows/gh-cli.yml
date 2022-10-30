@@ -10,6 +10,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: cli gh release view
+        continue-on-error: true
         run: |
          gh release view
         env:
