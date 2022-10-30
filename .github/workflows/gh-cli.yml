@@ -47,7 +47,7 @@ jobs:
       - name: git log
         continue-on-error: true
         run: |
-         git log ${{ env.last_relase }}...${{ env.new_relase }} --oneline
+         git diff ${{ env.last_relase }}...${{ env.new_relase }} --oneline
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
