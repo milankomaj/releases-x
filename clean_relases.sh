@@ -1,5 +1,2 @@
 #!/bin/sh
-gh release list \
-| sed 's/|/ /' | gawk '{print $1, $8}' \
-git fetch
-git tag -l | xargs -n 1 git push --delete origin
+gh release list --limit 9999 | gawk -F '\t' '$2 == "Pre-release" {print $3}' | xargs -p -L1 gh release delete --yes
