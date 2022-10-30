@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo gh release list --limit 9999 | gawk '{print $1, $8}' | xargs -p -L1 gh release delete --cleanup-tag --yes
+gh release list --limit 9999 | awk -F '\t' '$2 == "release" {print $3}' | xargs -p -L1 gh release delete --yes --cleanup-tag
