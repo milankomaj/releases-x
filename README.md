@@ -11,7 +11,7 @@ tag:          |true  |
 rewrite:      |false | false
 files:        |false |
 
-###### minimal example
+> ###### minimal example
 ```
       - uses: milankomaj/releases-x@v0.1
         with:
@@ -20,7 +20,7 @@ files:        |false |
           tag: v0.2
  ```
 
-###### full example
+> ###### full example
 ```
       - uses: milankomaj/releases-x@v0.1
         with:
