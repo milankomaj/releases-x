@@ -17,6 +17,23 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
+      
+      - uses: actions/upload-artifact@v3
+        with:
+         name: workflows
+         path: ${{ github.workspace }}/.github/workflows/*.yml  
+         
+      - uses: actions/upload-artifact@v3
+        with:
+         name: composite
+         path: ${{ github.workspace }}/*.yml   
+
+      - uses: actions/download-artifact@v3
+        with:
+         path: ./artifacts/
+
+      - name: tree
+        run:  tree -h ${{ github.workspace }}/./artifacts/
 
       - uses: milankomaj/releases-x@v0.1
         with:
@@ -25,6 +42,8 @@ jobs:
           tag: v0.2
           rewrite: true          
           files: | 
-           ${{ github.workspace }}/.github/workflows/*.yml \
-           ${{ github.workspace }}/*.yml
+           ./artifacts/workflows/action.yml \
+           ${{ github.workspace }}/./composite/composite-test.yml
+    
+
          
