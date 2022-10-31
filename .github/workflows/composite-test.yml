@@ -38,7 +38,6 @@ jobs:
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          target:
           title: relase
           tag: v0.2
           rewrite: true
