@@ -43,6 +43,7 @@ runs:
       id: target
       if: inputs.target
       run: echo "target=$(echo ${{ inputs.target }})" >> $GITHUB_ENV
+      shell: bash
 
     - name: inputs.title
       id: title
