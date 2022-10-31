@@ -12,8 +12,8 @@ inputs:
     default: master
   title:  # id of input
     description: 'Use title'
-    required: true
-    default: ''
+    required: false
+    default: ${{ github.repository }}
   tag:  # id of input
     description: 'Use tag'
     required: false

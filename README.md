@@ -6,17 +6,16 @@
 ---: | :---: | :---
 GITHUB_TOKEN: |**true**|
 target:       | false  | `master`
-title:        |**true**|
+title:        | false  | `${{ github.repository }}`
 tag:          | false  | `v.0.${{ github.run_id }}`
 rewrite:      | false  | `false`
-files:        | false  |
+files:        | false  | Source code (zip, tar.gz)
 
 > ###### minimal example
 ```
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          title: relase
  ```
 
 > ###### full example
