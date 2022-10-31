@@ -20,12 +20,12 @@ jobs:
       
       - uses: actions/upload-artifact@v3
         with:
-         name: workflows&yml
+         name: workflows\&yml
          path: ${{ github.workspace }}/.github/workflows/*.yml  
          
       - uses: actions/upload-artifact@v3
         with:
-         name: composite&yml
+         name: composite\&yml
          path: ${{ github.workspace }}/*.yml   
 
       - uses: actions/download-artifact@v3
