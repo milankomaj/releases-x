@@ -9,7 +9,7 @@ inputs:
   target :  # id of input
     description: 'Use target branch'
     required: false
-    default: 'master'
+    default: master
   title:  # id of input
     description: 'Use title'
     required: true
