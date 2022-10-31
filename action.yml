@@ -6,6 +6,10 @@ inputs:
     description: 'Use GITHUB_TOKEN'
     required: true
     default: ''
+  target :  # id of input
+    description: 'Use target branch'
+    required: false
+    default: 'master'
   title:  # id of input
     description: 'Use title'
     required: true
@@ -34,6 +38,11 @@ runs:
       if: inputs.GITHUB_TOKEN
       run: echo "GITHUB_TOKEN=$(echo ${{ inputs.GITHUB_TOKEN }})" >> $GITHUB_ENV
       shell: bash
+
+    - name: inputs.target
+      id: target
+      if: inputs.target
+      run: echo "target=$(echo ${{ inputs.target }})" >> $GITHUB_ENV
 
     - name: inputs.title
       id: title
@@ -84,7 +93,7 @@ runs:
         gh release create \
         ${{ env.tag }} \
         ${{ env.files }} \
-        --target master \
+        --target ${{ env.target }} \
         --generate-notes \
         --title ${{ env.title }}
         new_relase=$(gh release view --json tagName --jq .tagName)
