@@ -4,7 +4,7 @@
 
 *with* | *required*  | *default*
 ---: | :---: | :---
-GITHUB_TOKEN: | - [x]  |
+GITHUB_TOKEN: | -[x]  |
 target:       | - [ ]  | master
 title:        | - [x]  |
 tag:          | - [x]  |
