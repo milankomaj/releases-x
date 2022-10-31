@@ -17,7 +17,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
 
-      - run: git switch v0.3
+      - run:  |
+         git switch -
+         git switch v0.3
         shell: bash
 
       - uses: actions/checkout@v3
