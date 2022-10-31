@@ -5,10 +5,10 @@
 *with* | *required*  | *default*
 ---: | :---: | :---
 GITHUB_TOKEN: |**true**|
-target:       |false   | master
+target:       |false   | `master`
 title:        |**true**|
 tag:          |**true**|
-rewrite:      | false  | false
+rewrite:      | false  | `false`
 files:        | false  |
 
 > ###### minimal example
