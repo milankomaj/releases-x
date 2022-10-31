@@ -41,7 +41,7 @@ jobs:
         run: |
          gh release create \
           ${{ github.run_id }} \
-          ./*.txt \
+          ./*.yml \
           --target master \
           --notes-start-tag ${{ env.last_relase }} \
           --title v0.2

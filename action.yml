@@ -1,5 +1,9 @@
 name: 'Create release.'
 description: 'release create action'
+author: "nilankomaj"
+branding:
+  icon: "x-square"
+  color: "green"
 
 inputs:
   GITHUB_TOKEN:  # id of input
