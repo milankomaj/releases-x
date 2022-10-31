@@ -42,7 +42,7 @@ jobs:
           tag: v0.2
           rewrite: true          
           files: | 
-           ./artifacts/workflows/action.yml \
+           ${{ github.workspace }}/./artifacts/workflows/action.yml \
            ${{ github.workspace }}/./composite/composite-test.yml
     
 
