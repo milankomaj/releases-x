@@ -42,8 +42,8 @@ jobs:
           tag: v0.2
           rewrite: true          
           files: | 
-           ${{ github.workspace }}/./artifacts/workflows/action.yml \
-           ${{ github.workspace }}/./composite/composite-test.yml
+           ${{ github.workspace }}/./artifacts/workflows/gh-cli.yml \
+           ${{ github.workspace }}/./composite/action.yml
     
 
          
