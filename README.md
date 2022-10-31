@@ -4,12 +4,12 @@
 
 *with* | *required*  | *default*
 ---: | :---: | :---
-GITHUB_TOKEN: | -[x]  |
-target:       | - [ ]  | master
-title:        | - [x]  |
-tag:          | - [x]  |
-rewrite:      | - [ ]  | false
-files:        | - [ ]  |
+GITHUB_TOKEN: |true  |
+target:       |false | master
+title:        |true  |
+tag:          |true  |
+rewrite:      |false | false
+files:        |false |
 
 
 ###### example
