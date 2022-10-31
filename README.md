@@ -1,5 +1,5 @@
 # releases-x
-### Composite action.
+### Composite action to create a release.
 
 
 *with* | *required*  | *default*
