@@ -43,7 +43,7 @@ jobs:
           rewrite: true          
           files: | 
            ${{ github.workspace }}/./artifacts/workflows/gh-cli.yml \
-           ${{ github.workspace }}/./composite/action.yml
+           ${{ github.workspace }}/./artifacts/composite/action.yml
     
 
          
