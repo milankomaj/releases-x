@@ -17,16 +17,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: actions/upload-artifact@v3
         with:
          name: workflows
-         path: ${{ github.workspace }}/.github/workflows/*.yml  
-         
+         path: ${{ github.workspace }}/.github/workflows/*.yml
+
       - uses: actions/upload-artifact@v3
         with:
          name: composite
-         path: ${{ github.workspace }}/*.yml   
+         path: ${{ github.workspace }}/*.yml
 
       - uses: actions/download-artifact@v3
         with:
@@ -38,7 +38,6 @@ jobs:
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-<<<<<<< HEAD
           target: ''
           title: 'relase'
           tag: 'v0.2'
@@ -46,13 +45,3 @@ jobs:
           files: |
            ${{ github.workspace }}/.github/workflows/*.yml \
            ${{ github.workspace }}/*.yml
-=======
-          title: relase
-          tag: v0.2
-          rewrite: true          
-          files: | 
-           ${{ github.workspace }}/./artifacts/**/*
-    
-
-         
->>>>>>> 0eb0f9b7115e0e6dca3782c9affaeb37efaad671
