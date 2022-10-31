@@ -1,3 +1,3 @@
 #!/bin/sh
 gh release list
-gh release list -R cli/cli --limit 999 | awk -F '\t' '{if (match($3, "^v0\.")) print $3}'
+gh release list --limit 9999 | gawk -F '\t' '$1 = "v0\.*" {print $3}' | xargs -L1 gh release delete --yes --cleanup-tag
