@@ -5,9 +5,9 @@
 *with* | *required*  | *default*
 ---: | :---: | :---
 GITHUB_TOKEN: |**true**|
-target:       |false   | `master`
+target:       | false  | `master`
 title:        |**true**|
-tag:          |**true**|
+tag:          | false  | `v.0.${{ github.run_id }}`
 rewrite:      | false  | `false`
 files:        | false  |
 
@@ -17,7 +17,6 @@ files:        | false  |
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           title: relase
-          tag: v0.2
  ```
 
 > ###### full example
