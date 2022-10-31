@@ -3,7 +3,7 @@
 
 
 *with* | *required*  | *default*
----: | ---: | ---:
+---: | :---: | :---
 GITHUB_TOKEN: |true  |
 target:       |false | master
 title:        |true  |
