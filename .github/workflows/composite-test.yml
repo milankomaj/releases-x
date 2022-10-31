@@ -2,7 +2,7 @@ name: release-matrix-test
 run-name: ${{ github.workflow }} ✅ ${{ github.actor }} ✅ ${{ github.event_name}}
 on:
   workflow_dispatch:
-
+   branches: '**'
 
 jobs:
   bash:
