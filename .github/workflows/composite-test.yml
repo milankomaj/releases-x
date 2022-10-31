@@ -17,12 +17,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
 
-      - run:  |
-         git switch -
-         git switch v0.3
-        shell: bash
-
       - uses: actions/checkout@v3
+        with:
+          ref: v0.3
+
+      - run: git switch v0.3
+        shell: bash
 
       - uses: actions/upload-artifact@v3
         with:
