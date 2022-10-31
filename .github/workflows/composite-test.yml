@@ -42,8 +42,7 @@ jobs:
           tag: v0.2
           rewrite: true          
           files: | 
-           ${{ github.workspace }}/./artifacts/**/* \
-           # ${{ github.workspace }}/./artifacts/composite/action.yml
+           ${{ github.workspace }}/./artifacts/**/*
     
 
          
