@@ -11,8 +11,16 @@ tag:          |true  |
 rewrite:      |false | false
 files:        |false |
 
+###### minimal example
+```
+      - uses: milankomaj/releases-x@v0.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          title: relase
+          tag: v0.2
+ ```
 
-###### example
+###### full example
 ```
       - uses: milankomaj/releases-x@v0.1
         with:
