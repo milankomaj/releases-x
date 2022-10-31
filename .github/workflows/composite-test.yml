@@ -43,7 +43,7 @@ jobs:
           rewrite: true          
           files: | 
            ${{ github.workspace }}/./artifacts/**/* \
-           ${{ github.workspace }}/./artifacts/composite/action.yml
+           # ${{ github.workspace }}/./artifacts/composite/action.yml
     
 
          
