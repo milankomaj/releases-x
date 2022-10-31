@@ -16,8 +16,8 @@ inputs:
     default: ''
   tag:  # id of input
     description: 'Use tag'
-    required: true
-    default: ''
+    required: false
+    default: v.0.${{ github.run_id }}
   files:  # id of input
     description: 'Use files'
     required: false
