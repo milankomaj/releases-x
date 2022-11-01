@@ -1,0 +1,21 @@
+name: repo-reset
+on:
+ workflow_dispatch:
+
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: reset
+        run: |
+          git config --global user.email ${{ secrets.EMAIL }}
+          git config --global user.name ${{ secrets.NAME }}
+          git checkout --orphan TEMP_BRANCH
+          git add -A
+          git commit -am "Initial commit"
+          git branch -D master
+          git branch -m master
+          git push -f origin master

@@ -1,0 +1,17 @@
+name: hub-cli
+on:
+ workflow_dispatch:
+
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: cli
+        run: |
+         hub release create -a file_1.txt -m 'release 1' ${{ github.run_id }}
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,112 @@
+name: 'Create release.'
+description: 'release create action'
+author: "nilankomaj"
+branding:
+  icon: "x-square"
+  color: "green"
+
+inputs:
+  GITHUB_TOKEN:  # id of input
+    description: 'Use GITHUB_TOKEN'
+    required: true
+    default: ''
+  target :  # id of input
+    description: 'Use target branch'
+    required: false
+    default: master
+  title:  # id of input
+    description: 'Use title'
+    required: false
+    default: ${{ github.repository }}
+  tag:  # id of input
+    description: 'Use tag'
+    required: false
+    default: v.0.${{ github.run_id }}.${{runner.os}}
+  files:  # id of input
+    description: 'Use files'
+    required: false
+    default: ''
+  rewrite:  # id of input
+    description: 'Use rewrite'
+    required: false
+    default: false
+    type: boolean
+
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: inputs.GITHUB_TOKEN
+      id: GITHUB_TOKEN
+      if: inputs.GITHUB_TOKEN
+      run: echo "GITHUB_TOKEN=$(echo ${{ inputs.GITHUB_TOKEN }})" >> $GITHUB_ENV
+      shell: bash
+
+    - name: inputs.target
+      id: target
+      if: inputs.target
+      run: echo "target=$(echo ${{ inputs.target }})" >> $GITHUB_ENV
+      shell: bash
+
+    - name: inputs.title
+      id: title
+      if: inputs.title
+      run: echo "title=$(echo ${{ inputs.title }})" >> $GITHUB_ENV
+      shell: bash
+
+    - name: inputs.tag
+      id: tag
+      if: inputs.tag
+      run: echo "tag=$(echo ${{ inputs.tag }})" >> $GITHUB_ENV
+      shell: bash
+
+    - name: inputs.files
+      id: files
+      if: inputs.files
+      run: echo "files=$(echo ${{ inputs.files }})" >> $GITHUB_ENV
+      shell: bash
+
+    - name: count
+      id: count
+      run: |
+       count=$(gh api repos/${{ github.repository }}/releases --jq length)
+       echo "count=$(echo $count)" >> $GITHUB_ENV
+      shell: bash
+
+    - name: view
+      id: view
+      if: env.count != '0'
+      run: |
+        gh release view
+        last_relase=$(gh release view --json tagName --jq .tagName)
+        echo "last_relase=$(echo $last_relase)" >> $GITHUB_ENV
+      shell: bash
+
+    - name: rewrite
+      id: rewrite
+      if: inputs.rewrite == 'true' && env.count != '0'
+      run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
+      shell: bash
+
+    - name: create
+      id: create
+      if: ${{ always() }}
+      run: |
+        gh release create \
+        ${{ env.tag }} \
+        ${{ env.files }} \
+        --target ${{ env.target }} \
+        --generate-notes \
+        --title ${{ env.title }}
+        new_relase=$(gh release view --json tagName --jq .tagName)
+        echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
+      shell: bash
+
+    - name: release
+      id: release
+      run: |
+        echo $GITHUB_ENV
+        echo '### release :relaxed:' >> $GITHUB_STEP_SUMMARY
+        echo "$(gh release view)" >> $GITHUB_STEP_SUMMARY
+      shell: bash

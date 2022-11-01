@@ -1,0 +1,125 @@
+name: release-matrix-test
+run-name: ${{ github.workflow }} ✅ ${{ github.actor }} ✅ ${{ github.event_name}}
+on:
+  workflow_dispatch:
+jobs:
+  create:
+    name: RELEASE CREATE
+    strategy:
+      max-parallel: 3
+      matrix:
+       os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    outputs:
+      outcome-ubuntu-latest: ${{ steps.outcome-ubuntu-latest.outputs.outcome-ubuntu-latest }}
+      outcome-windows-latest: ${{ steps.outcome-windows-latest.outputs.outcome-windows-latest }}
+      outcome-macos-latest: ${{ steps.outcome-macos-latest.outputs.outcome-macos-latest }}
+      outcome-ubuntu-latest-os: ${{ steps.outcome-ubuntu-latest.outputs.outcome-ubuntu-latest-os }}
+      outcome-windows-latest-os: ${{ steps.outcome-windows-latest.outputs.outcome-windows-latest-os }}
+      outcome-macos-latest-os: ${{ steps.outcome-macos-latest.outputs.outcome-macos-latest-os }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - id: releases-x
+        continue-on-error: true
+        uses: milankomaj/releases-x@v0.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # target: master
+        # title: relase
+        # rewrite: true
+        # files: |
+        #  ${{ github.workspace }}/.github/workflows/*.yml \
+        #  ${{ github.workspace }}/*.yml
+
+      - name: outcome-ubuntu-latest
+        continue-on-error: true
+        id: outcome-ubuntu-latest
+        shell: bash
+        if:  ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+         echo ${{ steps.releases-x.outcome }}
+         echo "outcome-ubuntu-latest=${{ steps.releases-x.outcome }}" >> $GITHUB_OUTPUT
+         echo "outcome-ubuntu-latest-os=${{ matrix.os }}" >> $GITHUB_OUTPUT
+
+      - name: outcome-windows-latest
+        continue-on-error: true
+        id: outcome-windows-latest
+        shell: bash
+        if:  ${{ matrix.os == 'windows-latest' }}
+        run: |
+         echo ${{ steps.releases-x.outcome }}
+         echo "outcome-windows-latest=${{ steps.releases-x.outcome }}" >> $GITHUB_OUTPUT
+         echo "outcome-windows-latest-os=${{ matrix.os }}" >> $GITHUB_OUTPUT
+
+      - name: outcome-macos-latest
+        continue-on-error: true
+        id: outcome-macos-latest
+        shell: bash
+        if:  ${{ matrix.os == 'macos-latest' }}
+        run: |
+         echo ${{ steps.releases-x.outcome }}
+         echo "outcome-macos-latest=${{ steps.releases-x.outcome }}" >> $GITHUB_OUTPUT
+         echo "outcome-macos-latest-os=${{ matrix.os }}" >> $GITHUB_OUTPUT
+
+  summary:
+    name: GITHUB_STEP_SUMMARY
+    needs: create
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    outputs:
+      symbol-ubuntu-latest: ${{ steps.symbol-ubuntu-latest.outputs.symbol-ubuntu-latest }}
+      symbol-windows-latest: ${{ steps.symbol-windows-latest.outputs.symbol-windows-latest }}
+      symbol-macos-latest: ${{ steps.symbol-macos-latest.outputs.symbol-macos-latest}}
+    steps:
+
+       - name: symbol-ubuntu-latest
+         id: symbol-ubuntu-latest
+         shell: bash
+         if: needs.create.result
+         run: |
+          if [[ "${{ needs.create.outputs.outcome-ubuntu-latest }}" = "success" ]]
+          then
+          echo "symbol-ubuntu-latest=✅" >> $GITHUB_OUTPUT
+          else
+          echo "symbol-ubuntu-latest=❌" >> $GITHUB_OUTPUT
+          fi
+
+       - name: symbol-windows-latest
+         id: symbol-windows-latest
+         shell: bash
+         if: needs.create.result
+         run: |
+          if [[ "${{ needs.create.outputs.outcome-ubuntu-latest }}" = "success" ]]
+          then
+          echo "symbol-windows-latest=✅" >> $GITHUB_OUTPUT
+          else
+          echo "symbol-windows-latest=❌" >> $GITHUB_OUTPUT
+          fi
+
+       - name: symbol-macos-latest
+         id: symbol-macos-latest
+         shell: bash
+         if: needs.create.result
+         run: |
+          if [[ "${{ needs.create.outputs.outcome-ubuntu-latest }}" = "success" ]]
+          then
+          echo "symbol-macos-latest=✅" >> $GITHUB_OUTPUT
+          else
+          echo "symbol-macos-latest=❌" >> $GITHUB_OUTPUT
+          fi
+
+       - name: outcome
+         id: outcome
+         shell: bash
+         if:  needs.create.result
+         run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "[![release-matrix-test](https://github.com/milankomaj/releases-x/actions/workflows/composite-test.yml/badge.svg)](https://github.com/milankomaj/releases-x/actions/workflows/composite-test.yml)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**os** | **sumary** |  **job** " >> $GITHUB_STEP_SUMMARY
+          echo "---: | :--- | :---: " >> $GITHUB_STEP_SUMMARY
+          echo "$(echo ${{ needs.create.outputs.outcome-ubuntu-latest-os }}) | $(echo ${{ needs.create.outputs.outcome-ubuntu-latest }}) | $(echo ${{ steps.symbol-ubuntu-latest.outputs.symbol-ubuntu-latest }})" >> $GITHUB_STEP_SUMMARY
+          echo "$(echo ${{ needs.create.outputs.outcome-macos-latest-os }}) | $(echo ${{ needs.create.outputs.outcome-macos-latest }}) | $(echo ${{ steps.symbol-macos-latest.outputs.symbol-macos-latest }})" >> $GITHUB_STEP_SUMMARY
+          echo "$(echo ${{ needs.create.outputs.outcome-windows-latest-os }}) | $(echo ${{ needs.create.outputs.outcome-windows-latest }}) | $(echo ${{ steps.symbol-windows-latest.outputs.symbol-windows-latest }})" >> $GITHUB_STEP_SUMMARY
+

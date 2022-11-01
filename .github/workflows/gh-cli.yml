@@ -1,0 +1,75 @@
+# gh release create v0.3 ./file_1.txt ./file_2.txt --target master --notes-start-tag v0.2 --generate-notes
+name: gh-cli
+on:
+ workflow_dispatch:
+
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: gh api repos/${{ github.repository }}/releases
+        continue-on-error: true
+        run: |
+         gh api repos/${{ github.repository }}/releases --jq length
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: gh api repos/{owner}/{repo}/releases
+        continue-on-error: true
+        run: |
+         gh api repos/${{ github.repository }}/releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: cli gh release view
+        continue-on-error: true
+        run: |
+         gh release view
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: cli gh release view
+        continue-on-error: true
+        run: |
+         gh release view
+         last_relase=$(gh release view --json tagName --jq .tagName)
+         echo "last_relase=$(echo $last_relase)" >> $GITHUB_ENV
+         echo ${{ env.last_relase }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: cli gh release create
+        if: ${{ always() }}
+        run: |
+         gh release create \
+          ${{ github.run_id }} \
+          ./*.yml \
+          --target master \
+          --notes-start-tag ${{ env.last_relase }} \
+          --title v0.2
+         new_relase=$(gh release view --json tagName --jq .tagName)
+         echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
+         echo ${{ env.new_relase }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: git log
+        continue-on-error: true
+        run: |
+         git fetch --tags
+         log_relase=$(git log --date=short --pretty='format: author: %cn; date: %ci; subject:%s' ${{ env.last_relase }}..${{ env.new_relase }})
+         echo "log_relase=$(echo $log_relase)" >> $GITHUB_ENV
+         echo ${{ env.log_relase }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: cli gh release delete
+        continue-on-error: true
+        run: |
+         gh release delete ${{ env.last_relase }} --cleanup-tag --yes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
