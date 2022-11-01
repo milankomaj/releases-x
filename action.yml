@@ -67,16 +67,16 @@ runs:
       run: echo "files=$(echo ${{ inputs.files }})" >> $GITHUB_ENV
       shell: bash
 
-    - name: api
-      id: api
+    - name: count
+      id: count
       run: |
-       api=$(gh api repos/${{ github.repository }}/releases --jq length)
-       echo "api=$(echo $api)" >> $GITHUB_ENV
+       count=$(gh count repos/${{ github.repository }}/releases --jq length)
+       echo "count=$(echo $count)" >> $GITHUB_ENV
       shell: bash
 
     - name: view
       id: view
-      if: env.api != '0'
+      if: env.count != '0'
       run: |
         gh release view
         last_relase=$(gh release view --json tagName --jq .tagName)
@@ -85,7 +85,7 @@ runs:
 
     - name: rewrite
       id: rewrite
-      if: inputs.rewrite == 'true' && env.api != '0'
+      if: inputs.rewrite == 'true' && env.count != '0'
       run: gh release delete ${{ env.last_relase }} --cleanup-tag --yes
       shell: bash
 
@@ -107,4 +107,6 @@ runs:
       id: environment
       run: |
         echo $GITHUB_ENV
+        echo '#### environment' >> $GITHUB_STEP_SUMMARY
+        echo $GITHUB_ENV >> $GITHUB_STEP_SUMMARY
       shell: bash
