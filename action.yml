@@ -70,7 +70,7 @@ runs:
     - name: count
       id: count
       run: |
-       count=$(gh count repos/${{ github.repository }}/releases --jq length)
+       count=$(gh api repos/${{ github.repository }}/releases --jq length)
        echo "count=$(echo $count)" >> $GITHUB_ENV
       shell: bash
 
