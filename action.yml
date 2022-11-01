@@ -107,6 +107,6 @@ runs:
       id: release
       run: |
         echo $GITHUB_ENV
-        echo '#### release :relaxed:' >> $GITHUB_STEP_SUMMARY
-        echo "#### $(gh release view)" >> $GITHUB_STEP_SUMMARY
+        echo '### release :relaxed:' >> $GITHUB_STEP_SUMMARY
+        echo "$(gh release view)" >> $GITHUB_STEP_SUMMARY
       shell: bash
