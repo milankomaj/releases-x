@@ -72,7 +72,6 @@ runs:
       run: |
        api=$(gh api repos/${{ github.repository }}/releases --jq length)
        echo "api=$(echo $api)" >> $GITHUB_ENV
-       echo ${{ env.api }}
       shell: bash
 
     - name: view
@@ -82,7 +81,6 @@ runs:
         gh release view
         last_relase=$(gh release view --json tagName --jq .tagName)
         echo "last_relase=$(echo $last_relase)" >> $GITHUB_ENV
-        echo ${{ env.last_relase }}
       shell: bash
 
     - name: rewrite
@@ -103,5 +101,16 @@ runs:
         --title ${{ env.title }}
         new_relase=$(gh release view --json tagName --jq .tagName)
         echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
+      shell: bash
+
+    - name: environment
+      id: environment
+      run: |
+        echo ${{ env.last_relase }}
         echo ${{ env.new_relase }}
+        echo ${{ env.target }}
+        echo ${{ env.title }}
+        echo ${{ env.tag }}
+        echo ${{ env.api }}
+        echo ${{ env.files }}
       shell: bash
