@@ -6,21 +6,20 @@ on:
 jobs:
   cli:
     runs-on: ubuntu-latest
-
+    continue-on-error: true
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      fail-fast: false
     steps:
       - uses: actions/checkout@v3
       - name: clean relases and tags
         run: |
          chmod +x ./.github/clean_relases.sh
          ./.github/clean_relases.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
       - name: clean workflow_runs
         run: |
           gh api repos/${{ github.repository }}/actions/runs \
           --paginate -q '.workflow_runs[] | select(.head_branch == "master") | "\(.id)"' | \
           xargs -n1 -I % gh api repos/${{ github.repository }}/actions/runs/% -X DELETE
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
