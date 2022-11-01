@@ -106,11 +106,5 @@ runs:
     - name: environment
       id: environment
       run: |
-        echo ${{ env.last_relase }}
-        echo ${{ env.new_relase }}
-        echo ${{ env.target }}
-        echo ${{ env.title }}
-        echo ${{ env.tag }}
-        echo ${{ env.api }}
-        echo ${{ env.files }}
+        echo $GITHUB_ENV
       shell: bash
