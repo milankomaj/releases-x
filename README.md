@@ -1,6 +1,6 @@
 # releases-x
 > #### Composite action to create a release.
-
+> ``` - uses: milankomaj/releases-x@v0.1 ```
 
 **with:** | *required*  | *default*  | *optional*
 :--- | :---: | :--- | :---:
