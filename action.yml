@@ -103,10 +103,10 @@ runs:
         echo "new_relase=$(echo $new_relase)" >> $GITHUB_ENV
       shell: bash
 
-    - name: environment
-      id: environment
+    - name: release
+      id: release
       run: |
         echo $GITHUB_ENV
-        echo '#### environment' >> $GITHUB_STEP_SUMMARY
-        echo "$(echo $GITHUB_ENV)" >> $GITHUB_STEP_SUMMARY
+        echo '#### release' >> $GITHUB_STEP_SUMMARY
+        echo "$(gh release view)" >> $GITHUB_STEP_SUMMARY
       shell: bash
