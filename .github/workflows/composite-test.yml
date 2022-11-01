@@ -9,11 +9,11 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
-       os: [ubuntu-latest]
+       os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
     steps:
-    
+
       - uses: actions/checkout@v3
 
       - uses: milankomaj/releases-x@v0.1
