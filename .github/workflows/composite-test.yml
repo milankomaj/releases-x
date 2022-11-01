@@ -12,6 +12,7 @@ jobs:
        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
 
+      - uses: actions/checkout@v3
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
