@@ -2,14 +2,14 @@
 > #### Composite action to create a release.
 > ``` - uses: milankomaj/releases-x@v0.1 ```
 
-**with:** | *required*  | *default*  | *optional*
-:--- | :---: | :--- | :---:
-GITHUB_TOKEN: |**true**|                            |
-target:       | false  | `master`                   | ✅
-title:        | false  | `${{ github.repository }}` | ✅
-tag:          | false  | `v.0.${{ github.run_id }}` | ✅
-rewrite:      | false  | `false`                    | ✅
-files:        | false  | Source code (zip, tar.gz)  | ✅
+      **with:** | *required*  | *default*  | *optional*
+      :--- | :---: | :--- | :---:
+      GITHUB_TOKEN: |**true**|                            |
+      target:       | false  | `master`                   | ✅
+      title:        | false  | `${{ github.repository }}` | ✅
+      tag:          | false  | `v.0.${{ github.run_id }}` | ✅
+      rewrite:      | false  | `false`                    | ✅
+      files:        | false  | Source code (zip, tar.gz)  | ✅
 
 > ###### minimal example
 ```
