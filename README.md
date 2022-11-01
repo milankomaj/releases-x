@@ -2,8 +2,8 @@
 > #### Composite action to create a release.
 
 
-*with* | *required*  | *default*  | *optional*
----: | :---: | :--- | :---:
+**with:** | *required*  | *default*  | *optional*
+:--- | :---: | :--- | :---:
 GITHUB_TOKEN: |**true**|                            |
 target:       | false  | `master`                   | ✅
 title:        | false  | `${{ github.repository }}` | ✅
