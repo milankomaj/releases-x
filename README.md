@@ -3,7 +3,7 @@
 > ``` - uses: milankomaj/releases-x@v0.1 ```
 
 **with:** | *required*  | *default*  | *optional*
-:--- | :---: | :--- | :---:
+---: | :---: | :--- | :---:
 GITHUB_TOKEN: |**true**|                            |
 target:       | false  | `master`                   | ✅
 title:        | false  | `${{ github.repository }}` | ✅
