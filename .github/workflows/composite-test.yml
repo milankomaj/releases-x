@@ -5,6 +5,7 @@ on:
 jobs:
   create:
     name: RELEASE CREATE
+    timeout-minutes: 10
     strategy:
       max-parallel: 3
       matrix:
@@ -67,6 +68,7 @@ jobs:
     needs: create
     if: ${{ always() }}
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       symbol-ubuntu-latest: ${{ steps.symbol-ubuntu-latest.outputs.symbol-ubuntu-latest }}
       symbol-windows-latest: ${{ steps.symbol-windows-latest.outputs.symbol-windows-latest }}
@@ -122,4 +124,3 @@ jobs:
           echo "$(echo ${{ needs.create.outputs.outcome-ubuntu-latest-os }}) | $(echo ${{ needs.create.outputs.outcome-ubuntu-latest }}) | $(echo ${{ steps.symbol-ubuntu-latest.outputs.symbol-ubuntu-latest }})" >> $GITHUB_STEP_SUMMARY
           echo "$(echo ${{ needs.create.outputs.outcome-macos-latest-os }}) | $(echo ${{ needs.create.outputs.outcome-macos-latest }}) | $(echo ${{ steps.symbol-macos-latest.outputs.symbol-macos-latest }})" >> $GITHUB_STEP_SUMMARY
           echo "$(echo ${{ needs.create.outputs.outcome-windows-latest-os }}) | $(echo ${{ needs.create.outputs.outcome-windows-latest }}) | $(echo ${{ steps.symbol-windows-latest.outputs.symbol-windows-latest }})" >> $GITHUB_STEP_SUMMARY
-
