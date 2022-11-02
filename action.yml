@@ -1,6 +1,6 @@
 name: 'Create release.'
 description: 'release create action'
-author: "nilankomaj"
+author: "milankomaj"
 branding:
   icon: "x-square"
   color: "green"
