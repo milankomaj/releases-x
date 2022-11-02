@@ -1,12 +1,9 @@
 name: clean_relases
 on:
  workflow_dispatch:
-
-
 jobs:
   cli:
     runs-on: ubuntu-latest
-    continue-on-error: true
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     strategy:
@@ -14,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: clean relases and tags
+        continue-on-error: true
         run: |
          chmod +x ./.github/clean_relases.sh
          ./.github/clean_relases.sh
