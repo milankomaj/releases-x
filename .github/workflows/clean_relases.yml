@@ -4,6 +4,7 @@ on:
 jobs:
   cli:
     runs-on: ubuntu-latest
+    continue-on-error: true
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     strategy:
