@@ -1,5 +1,5 @@
 name: '✅ Create release'
-description: 'create'
+description: 'Publish Github releases'
 author: "milankomaj"
 branding:
   icon: "x-square"
