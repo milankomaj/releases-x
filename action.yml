@@ -1,5 +1,5 @@
-name: 'Create release.'
-description: 'release create action'
+name: 'r-e-l-e-a-s-e'
+description: 'Publish Github releases'
 author: "milankomaj"
 branding:
   icon: "x-square"
