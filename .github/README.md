@@ -14,14 +14,14 @@ files:        | false  | Source code (zip, tar.gz)                  | ✅
 ---
 
 > ###### minimal example
-```
+```YAML
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  ```
 
 > ###### full example
-```
+```YAML
       - uses: milankomaj/releases-x@v0.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
