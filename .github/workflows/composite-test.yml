@@ -92,7 +92,7 @@ jobs:
          shell: bash
          if: needs.create.result
          run: |
-          if [[ "${{ needs.create.outputs.outcome-ubuntu-latest }}" = "success" ]]
+          if [[ "${{ needs.create.outputs.outcome-windows-latest }}" = "success" ]]
           then
           echo "symbol-windows-latest=✅" >> $GITHUB_OUTPUT
           else
@@ -104,7 +104,7 @@ jobs:
          shell: bash
          if: needs.create.result
          run: |
-          if [[ "${{ needs.create.outputs.outcome-ubuntu-latest }}" = "success" ]]
+          if [[ "${{ needs.create.outputs.outcome-macos-latest }}" = "success" ]]
           then
           echo "symbol-macos-latest=✅" >> $GITHUB_OUTPUT
           else
