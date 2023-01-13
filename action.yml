@@ -1,4 +1,4 @@
-name: 'release-x'
+name: 'releases-x'
 description: 'Publish Github releases'
 author: "milankomaj"
 branding:
