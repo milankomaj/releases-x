@@ -20,7 +20,7 @@ jobs:
       outcome-macos-latest-os: ${{ steps.outcome-macos-latest.outputs.outcome-macos-latest-os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - id: releases-x
         continue-on-error: true
         uses: milankomaj/releases-x@v0.1
